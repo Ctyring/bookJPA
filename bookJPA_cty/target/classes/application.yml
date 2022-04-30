@@ -1,13 +1,13 @@
 server:
-  port: 18080
+  port: 9000
 spring:
   application:
     name: bookJPA-cty #指定服务名
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/erupt?characterEncoding=UTF8&useSSL=false
-    username: root
-    password: root
+    url: jdbc:mysql://124.221.104.172:3306/erupt?characterEncoding=UTF8&useSSL=false
+    username: erupt
+    password: Gi4f5DxYdY4xxGdC
   jpa: 
     database: MySQL
     show-sql: true
