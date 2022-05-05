@@ -19,8 +19,8 @@ public class User implements Serializable{
 
 	
 	private String birthday;//birthday
-	private String category;//category
-	private LONGTEXT des;//des
+	private String role;//category
+	private String des;//des
 	private Integer gender;//gender
 	private String name;//name
 	private String password;//password
@@ -42,17 +42,17 @@ public class User implements Serializable{
 		this.birthday = birthday;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getRole() {
+		return role;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setRole(String category) {
+		this.role = category;
 	}
 
-	public LONGTEXT getDes() {
+	public String getDes() {
 		return des;
 	}
-	public void setDes(LONGTEXT des) {
+	public void setDes(String des) {
 		this.des = des;
 	}
 

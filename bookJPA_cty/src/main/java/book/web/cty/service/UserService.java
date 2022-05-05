@@ -122,9 +122,9 @@ public class UserService {
                 if (searchMap.get("birthday")!=null && !"".equals(searchMap.get("birthday"))) {
                 	predicateList.add(cb.like(root.get("birthday").as(String.class), "%"+(String)searchMap.get("birthday")+"%"));
                 }
-                // category
-                if (searchMap.get("category")!=null && !"".equals(searchMap.get("category"))) {
-                	predicateList.add(cb.like(root.get("category").as(String.class), "%"+(String)searchMap.get("category")+"%"));
+                // role
+                if (searchMap.get("role")!=null && !"".equals(searchMap.get("role"))) {
+                	predicateList.add(cb.like(root.get("role").as(String.class), "%"+(String)searchMap.get("role")+"%"));
                 }
                 // name
                 if (searchMap.get("name")!=null && !"".equals(searchMap.get("name"))) {
