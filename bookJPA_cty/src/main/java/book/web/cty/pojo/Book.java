@@ -24,6 +24,9 @@ public class Book implements Serializable{
 	private String picture;//picture
 	private String press;//press
 	private Float price;//price
+	private Boolean isPurchase;//is_purchase
+	private Boolean isSale;//is_sale
+
 	@Transient
 	private String categoryName;
 	@Transient
@@ -101,6 +104,17 @@ public class Book implements Serializable{
 		this.price = price;
 	}
 
+	public Boolean getIsPurchase() {
+		return isPurchase;
+	}
+	public void setIsPurchase(Boolean isPurchase) {
+		this.isPurchase = isPurchase;
+	}
 
-	
+	public Boolean getIsSale() {
+		return isSale;
+	}
+	public void setIsSale(Boolean isSale) {
+		this.isSale = isSale;
+	}
 }
