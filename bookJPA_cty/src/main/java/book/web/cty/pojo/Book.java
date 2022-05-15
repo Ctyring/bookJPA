@@ -23,7 +23,8 @@ public class Book implements Serializable{
 	private String name;//name
 	private String picture;//picture
 	private String press;//press
-	private Float price;//price
+	private Float salePrice;//price
+	private Float purchasePrice;//price
 	private Boolean isPurchase;//is_purchase
 	private Boolean isSale;//is_sale
 
@@ -97,11 +98,19 @@ public class Book implements Serializable{
 		this.press = press;
 	}
 
-	public Float getPrice() {
-		return price;
+	public Float getSalePrice() {
+		return salePrice;
 	}
-	public void setPrice(Float price) {
-		this.price = price;
+	public void setSalePrice(Float salePrice) {
+		this.salePrice = salePrice;
+	}
+
+	public Float getPurchasePrice() {
+		return purchasePrice;
+	}
+
+	public void setPurchasePrice(Float purchasePrice) {
+		this.purchasePrice = purchasePrice;
 	}
 
 	public Boolean getIsPurchase() {
@@ -117,4 +126,6 @@ public class Book implements Serializable{
 	public void setIsSale(Boolean isSale) {
 		this.isSale = isSale;
 	}
+
+
 }

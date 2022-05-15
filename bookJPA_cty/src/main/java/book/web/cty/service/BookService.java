@@ -134,7 +134,22 @@ public class BookService {
                 if (searchMap.get("press")!=null && !"".equals(searchMap.get("press"))) {
                 	predicateList.add(cb.like(root.get("press").as(String.class), "%"+(String)searchMap.get("press")+"%"));
                 }
-				
+				if (searchMap.get("isSale")!=null && !"".equals(searchMap.get("isSale"))) {
+					if (searchMap.get("isSale").equals(true)){
+						predicateList.add(cb.isTrue(root.get("isSale").as(Boolean.class)));
+					}
+					else{
+						predicateList.add(cb.isFalse(root.get("isSale").as(Boolean.class)));
+					}
+				}
+				if (searchMap.get("isPurchase")!=null && !"".equals(searchMap.get("isPurchase"))) {
+					if (searchMap.get("isPurchase").equals(true)){
+						predicateList.add(cb.isTrue(root.get("isPurchase").as(Boolean.class)));
+					}
+					else{
+						predicateList.add(cb.isFalse(root.get("isPurchase").as(Boolean.class)));
+					}
+				}
 				return cb.and( predicateList.toArray(new Predicate[predicateList.size()]));
 
 			}

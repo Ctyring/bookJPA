@@ -37,13 +37,7 @@ public class BookController {
 
 	@Autowired
 	private PressService pressService;
-	
 
-	@GetMapping("/test")
-	@ApiOperation(value = "获取当前用户")
-	public Result nowUser(HttpServletResponse response, HttpServletRequest request){
-		return new Result(true, StatusCode.OK, "查询成功", request.getSession().getAttribute("user"));
-	}
 
 	/**
 	 * 查询全部数据
