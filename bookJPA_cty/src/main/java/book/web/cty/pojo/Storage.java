@@ -3,7 +3,10 @@ package book.web.cty.pojo;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.List;
+
 /**
  * storage实体类
  * @author Administrator
@@ -20,7 +23,8 @@ public class Storage implements Serializable{
 	
 	private java.util.Date storageTime;//storage_time
 	private Long userId;//user_id
-
+	@Transient
+	public List<StorageDetails> detailsList;
 	
 	public Long getId() {
 		return id;
@@ -43,6 +47,11 @@ public class Storage implements Serializable{
 		this.userId = userId;
 	}
 
+	public List<StorageDetails> getDetailsList() {
+		return detailsList;
+	}
 
-	
+	public void setDetailsList(List<StorageDetails> detailsList) {
+		this.detailsList = detailsList;
+	}
 }

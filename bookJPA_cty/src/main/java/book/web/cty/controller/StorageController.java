@@ -2,6 +2,8 @@ package book.web.cty.controller;
 import java.util.List;
 import java.util.Map;
 
+import book.web.cty.pojo.StorageDetails;
+import book.web.cty.service.StorageDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,6 +31,9 @@ public class StorageController {
 
 	@Autowired
 	private StorageService storageService;
+
+	@Autowired
+	private StorageDetailsService storageDetailsService;
 	
 	
 	/**
@@ -80,6 +85,10 @@ public class StorageController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public Result add(@RequestBody Storage storage  ){
+		List<StorageDetails> list = storage.getDetailsList();
+		for (StorageDetails details : list) {
+			storageDetailsService.add(details);
+		}
 		storageService.add(storage);
 		return new Result(true,StatusCode.OK,"增加成功");
 	}
