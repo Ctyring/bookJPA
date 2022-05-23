@@ -15,7 +15,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="bookJPA_common" options="-parameters" />
       <module name="bookJPA_cty" options="-parameters" />
-      <module name="bookJPA_parent" options="-parameters" />
+      <module name="bookJPA_parent" options="" />
     </option>
   </component>
 </project>

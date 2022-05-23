@@ -1,6 +1,7 @@
 package book.web.cty.controller;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import book.web.cty.service.CategoryService;
 import book.web.cty.service.PressService;
@@ -70,8 +71,12 @@ public class BookController {
 	public Result findSearch(@RequestBody Map searchMap , @PathVariable int page, @PathVariable int size){
 		Page<Book> pageList = bookService.findSearch(searchMap, page, size);
 		for (Book book: pageList) {
-			book.setCategoryName(categoryService.findById(Long.parseLong(book.getCategory())).getName());
-			book.setPressName(pressService.findById(Long.parseLong(book.getPress())).getName());
+			if (!(book.getCategory() == null)){
+				book.setCategoryName(categoryService.findById(Long.parseLong(book.getCategory())).getName());
+			}
+			if (!(book.getPress() == null)){
+				book.setPressName(pressService.findById(Long.parseLong(book.getPress())).getName());
+			}
 		}
 		return  new Result(true,StatusCode.OK,"查询成功",  new PageResult<Book>(pageList.getTotalElements(), pageList.getContent()) );
 	}

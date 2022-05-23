@@ -5,9 +5,12 @@ spring:
     name: bookJPA-cty #指定服务名
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/erupt?characterEncoding=UTF8&useSSL=false
-    username: root
-    password: root
+    url: jdbc:mysql://124.221.104.172:3306/erupt?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: erupt
+    password: Gi4f5DxYdY4xxGdC
+#    url: jdbc:mysql://localhost:3306/erupt?characterEncoding=UTF8&useSSL=false
+#    username: root
+#    password: root
   jpa: 
     database: MySQL
     show-sql: true
