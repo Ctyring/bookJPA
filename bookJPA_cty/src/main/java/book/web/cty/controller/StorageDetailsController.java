@@ -1,5 +1,4 @@
 package book.web.cty.controller;
-import java.util.List;
 import java.util.Map;
 
 import book.web.cty.pojo.StorageDetails;
@@ -24,7 +23,7 @@ import entity.StatusCode;
 @RestController
 @CrossOrigin
 @RequestMapping("/details")
-public class DetailsController {
+public class StorageDetailsController {
 
 	@Autowired
 	private StorageDetailsService storageDetailsService;
