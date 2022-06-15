@@ -6,4 +6,18 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <artifactId>bookJPA_common</artifactId>
+  <dependencies>
+
+
+    <!--邮件-->
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>javax.mail-api</artifactId>
+      <version>1.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+  </dependencies>
 </project>

@@ -55,9 +55,8 @@ public class StpInterfaceImpl implements StpInterface {
      */
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        // 本list仅做模拟，实际项目中要根据具体业务逻辑来查询角色
         List<String> list = new ArrayList<String>();
-        list.add(roleService.findById(Long.parseLong(userService.findById(Long.parseLong(loginId.toString())).getRole())).getName());
+//        list.add(roleService.findById(Long.parseLong(userService.findById(Long.parseLong(loginId.toString())).getRole())).getName());
         return list;
     }
 

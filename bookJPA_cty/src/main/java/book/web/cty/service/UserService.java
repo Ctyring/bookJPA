@@ -12,6 +12,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
+import entity.Result;
+import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,6 +40,27 @@ public class UserService {
 	
 	@Autowired
 	private IdWorker idWorker;
+
+	public User findUserByEmail(String email){
+		return userDao.findUserByEmail(email);
+	}
+
+	public User findUserByUsername(String username){
+		return userDao.findUserByUsername(username);
+	}
+
+	public Result checkUserIsEffective(User user){
+		if (user == null){
+			return new Result(false, StatusCode.ERROR, "请先注册");
+		}
+		if (StatusCode.DEL_FLAG_1.equals(user.getDelFlag())){
+			return new Result(false, StatusCode.ERROR, "该用户已经注销！");
+		}
+		if (StatusCode.USER_FREEZE.equals(user.getStatus())){
+			return new Result(false, StatusCode.ERROR, "该用户已经冻结！");
+		}
+		return new Result(true, StatusCode.OK, "");
+	}
 
 	/**
 	 * 查询全部列表
