@@ -10,8 +10,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import book.web.cty.message.EmailSendMsgHandle;
 import util.RedisUtil;
-import message.EmailSendMsgHandle;
 import util.oConvertUtils;
 
 /**
@@ -22,9 +23,11 @@ import util.oConvertUtils;
 @RequestMapping("/sys")
 @Api(tags="用户登录")
 @CrossOrigin
+
 public class LoginController {
 
-    RedisUtil redisUtil = new RedisUtil();
+    @Autowired
+    RedisUtil redisUtil;
 
     @Autowired
     UserService userService;

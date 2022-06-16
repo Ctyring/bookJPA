@@ -1,4 +1,4 @@
-package message;
+package book.web.cty.message;
 
 public interface ISendMsgHandle {
 

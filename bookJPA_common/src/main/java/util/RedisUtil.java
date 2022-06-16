@@ -1,10 +1,12 @@
 package util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +21,19 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtil {
 
-	@Autowired
+	@Resource
 	private RedisTemplate<String, Object> redisTemplate;
+
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
+
+	public static void main(String[] args) {
+		for (int i = 0; i < 100; i++){
+			RedisUtil redisUtil = new RedisUtil();
+			redisUtil.set(Integer.toString(i), "test");
+			System.out.println(i + "is ok");
+		}
+	}
 
 	/**
 	 * 指定缓存失效时间
