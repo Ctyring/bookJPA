@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/bookJPA_cloud/jeecg-boot-starter-cloud/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bookJPA_cloud/jeecg-boot-starter-cloud/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bookJPA_cloud/jeecg-cloud-nacos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bookJPA_cloud/jeecg-cloud-nacos/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bookJPA_cloud/nacos/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bookJPA_cloud/nacos/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bookJPA_cloud/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bookJPA_cloud/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bookJPA_common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/bookJPA_cty/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
