@@ -13,17 +13,19 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="gateway" target="1.8" />
       <module name="jeecg-boot-starter-cloud" target="1.8" />
       <module name="jeecg-cloud-nacos" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="bookJPA_cloud" options="-parameters" />
+      <module name="bookJPA_cloud" options="" />
       <module name="bookJPA_common" options="-parameters" />
       <module name="bookJPA_cty" options="-parameters" />
       <module name="bookJPA_nacos" options="-parameters" />
       <module name="bookJPA_parent" options="" />
+      <module name="gateway" options="-parameters" />
       <module name="jeecg-boot-starter-cloud" options="-parameters" />
       <module name="jeecg-cloud-nacos" options="-parameters" />
     </option>

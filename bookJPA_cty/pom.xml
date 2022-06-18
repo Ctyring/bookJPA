@@ -37,6 +37,24 @@
 		  <artifactId>sa-token-spring-boot-starter</artifactId>
 		  <version>1.29.0</version>
 	  </dependency>
+
+	  <!-- hutool工具类-->
+	  <dependency>
+		  <groupId>cn.hutool</groupId>
+		  <artifactId>hutool-core</artifactId>
+		  <version>${hutool.version}</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>cn.hutool</groupId>
+		  <artifactId>hutool-crypto</artifactId>
+		  <version>${hutool.version}</version>
+	  </dependency>
+
+	  <dependency>
+		  <groupId>com.alibaba.cloud</groupId>
+		  <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		  <version>${spring-cloud-alibaba.version}</version>
+	  </dependency>
   </dependencies>
 
 	<build>

@@ -2,6 +2,7 @@ package book.web.cty.controller;
 
 import book.web.cty.pojo.User;
 import book.web.cty.service.UserService;
+
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
 import entity.Result;
