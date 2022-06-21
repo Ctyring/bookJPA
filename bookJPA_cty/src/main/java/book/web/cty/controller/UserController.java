@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,13 @@ import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.web.client.RestTemplate;
+import util.MD5Util;
 import util.PasswordUtil;
 import redis.util.RedisUtil;
+import util.RandImageUtil;
 import util.oConvertUtils;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * user控制器层
@@ -28,7 +33,7 @@ import util.oConvertUtils;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UserController {
 
     @Autowired
@@ -37,6 +42,28 @@ public class UserController {
     private RestTemplate restTemplate = new RestTemplate();
 
     private RedisUtil redisUtil = new RedisUtil();
+
+    private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
+    /**
+     * 后台生成图形验证码 ：有效
+     * @param response
+     * @param key
+     */
+    @ApiOperation("获取验证码")
+    @GetMapping(value = "/randomImage/{key}")
+    public Result randomImage(HttpServletResponse response, @PathVariable String key){
+        try {
+            String code = RandomUtil.randomString(BASE_CHECK_CODES,4);
+            String lowerCaseCode = code.toLowerCase();
+            String realKey = MD5Util.MD5Encode(lowerCaseCode+key, "utf-8");
+            redisUtil.set(realKey, lowerCaseCode, 60);
+            String base64 = RandImageUtil.generate(code);
+            return new Result(true, StatusCode.OK, base64);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, StatusCode.ERROR, "获取验证码失败");
+        }
+    }
 
     /**
      * 增加

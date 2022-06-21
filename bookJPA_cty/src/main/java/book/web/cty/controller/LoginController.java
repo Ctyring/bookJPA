@@ -21,7 +21,7 @@ import util.oConvertUtils;
  * @since 2018-12-17
  */
 @RestController
-@RequestMapping("/sys")
+@RequestMapping("sys")
 @Api(tags="用户登录")
 @CrossOrigin
 public class LoginController {

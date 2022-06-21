@@ -24,7 +24,7 @@ import entity.StatusCode;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/advertise")
+@RequestMapping("advertise")
 public class AdvertiseController {
 
 	@Autowired

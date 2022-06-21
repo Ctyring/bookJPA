@@ -24,7 +24,7 @@ import entity.StatusCode;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/press")
+@RequestMapping("press")
 public class PressController {
 
 	@Autowired

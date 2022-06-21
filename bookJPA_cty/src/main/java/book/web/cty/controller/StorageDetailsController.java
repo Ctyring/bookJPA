@@ -22,7 +22,7 @@ import entity.StatusCode;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/details")
+@RequestMapping("details")
 public class StorageDetailsController {
 
 	@Autowired

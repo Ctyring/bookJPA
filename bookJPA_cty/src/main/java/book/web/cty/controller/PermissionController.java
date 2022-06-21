@@ -24,7 +24,7 @@ import entity.StatusCode;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/permission")
+@RequestMapping("permission")
 public class PermissionController {
 
 	@Autowired

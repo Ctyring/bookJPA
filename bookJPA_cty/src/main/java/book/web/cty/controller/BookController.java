@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/book")
+@RequestMapping("book")
 public class BookController {
 
 	@Autowired
