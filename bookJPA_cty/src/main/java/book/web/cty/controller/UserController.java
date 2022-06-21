@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired

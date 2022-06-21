@@ -24,7 +24,7 @@ import entity.StatusCode;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("category")
+@RequestMapping("/category")
 public class CategoryController {
 
 	@Autowired

@@ -10,6 +10,9 @@
         <module>bookJPA_common</module>
         <module>bookJPA_cty</module>
         <module>bookJPA_cloud</module>
+        <module>User</module>
+        <module>moudle</module>
+        <module>User</module>
 
     </modules>
     <packaging>pom</packaging>

@@ -13,6 +13,12 @@
         <module name="gateway" />
         <module name="nacos" />
       </profile>
+      <profile name="Annotation profile for bookJPA_parent" enabled="true">
+        <sourceOutputDir name="../../User/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../User/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="User" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="jeecg-cloud-nacos" target="1.8" />
@@ -20,12 +26,14 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="User" options="-parameters" />
       <module name="bookJPA_cloud" options="" />
       <module name="bookJPA_common" options="-parameters" />
       <module name="bookJPA_cty" options="-parameters" />
       <module name="bookJPA_parent" options="" />
       <module name="gateway" options="-parameters" />
       <module name="jeecg-cloud-nacos" options="-parameters" />
+      <module name="moudle" options="" />
       <module name="nacos" options="-parameters" />
       <module name="starter" options="-parameters" />
     </option>

@@ -24,7 +24,7 @@ import entity.StatusCode;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("role")
+@RequestMapping("/role")
 public class RoleController {
 
 	@Autowired
