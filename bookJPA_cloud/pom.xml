@@ -14,6 +14,7 @@
     <modules>
         <module>nacos</module>
         <module>gateway</module>
+        <module>starter</module>
     </modules>
 
 <dependencies>

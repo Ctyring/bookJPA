@@ -9,6 +9,8 @@
         <option value="$PROJECT_DIR$/bookJPA_cloud/nacos/pom.xml" />
         <option value="$PROJECT_DIR$/bookJPA_cloud/gateway/pom.xml" />
         <option value="$PROJECT_DIR$/bookJPA_cloud/starter/pom.xml" />
+        <option value="$PROJECT_DIR$/moudle/pom.xml" />
+        <option value="$PROJECT_DIR$/moudle/User/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

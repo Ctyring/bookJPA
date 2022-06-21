@@ -1,4 +1,0 @@
-org\jeecg\starter\cloud\config\PersonBeanConfiguration.class
-org\jeecg\starter\cloud\feign\IJeecgFeignService.class
-org\jeecg\starter\cloud\feign\impl\JeecgFeignService.class
-org\jeecg\config\FeignConfig.class
