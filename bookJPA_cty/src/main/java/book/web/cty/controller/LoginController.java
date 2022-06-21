@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import book.web.cty.message.EmailSendMsgHandle;
-import util.RedisUtil;
+import redis.util.RedisUtil;
 import util.oConvertUtils;
 
 /**
@@ -24,7 +24,6 @@ import util.oConvertUtils;
 @RequestMapping("/sys")
 @Api(tags="用户登录")
 @CrossOrigin
-
 public class LoginController {
 
     @Autowired

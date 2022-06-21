@@ -7,8 +7,24 @@
   </parent>
   <artifactId>bookJPA_common</artifactId>
   <dependencies>
-
-
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <!-- hutool工具类-->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-crypto</artifactId>
+    </dependency>
+    <!--加载beanutils-->
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+    </dependency>
     <!--邮件-->
     <dependency>
       <groupId>javax.mail</groupId>
@@ -34,6 +50,12 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-pool2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba.nacos</groupId>
+      <artifactId>nacos-common</artifactId>
+      <version>1.3.3</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 </project>

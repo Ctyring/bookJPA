@@ -7,14 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bookJPA_nacos" />
         <module name="bookJPA_cty" />
+        <module name="starter" />
         <module name="bookJPA_common" />
+        <module name="gateway" />
+        <module name="nacos" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="gateway" target="1.8" />
-      <module name="jeecg-boot-starter-cloud" target="1.8" />
       <module name="jeecg-cloud-nacos" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -23,11 +23,11 @@
       <module name="bookJPA_cloud" options="" />
       <module name="bookJPA_common" options="-parameters" />
       <module name="bookJPA_cty" options="-parameters" />
-      <module name="bookJPA_nacos" options="-parameters" />
       <module name="bookJPA_parent" options="" />
       <module name="gateway" options="-parameters" />
-      <module name="jeecg-boot-starter-cloud" options="-parameters" />
       <module name="jeecg-cloud-nacos" options="-parameters" />
+      <module name="nacos" options="-parameters" />
+      <module name="starter" options="-parameters" />
     </option>
   </component>
 </project>

@@ -7,8 +7,8 @@
         <groupId>book.web</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>bookJPA_nacos</artifactId>
-    <name>bookJPA_nacos</name>
+    <artifactId>nacos</artifactId>
+    <name>nacos</name>
     <description>nacos启动模块</description>
 
     <repositories>
@@ -31,6 +31,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>book.web</groupId>
+            <artifactId>starter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
@@ -58,6 +63,11 @@
             <groupId>org.jeecgframework.nacos</groupId>
             <artifactId>nacos-console</artifactId>
             <version>1.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.27</version>
         </dependency>
     </dependencies>
 
