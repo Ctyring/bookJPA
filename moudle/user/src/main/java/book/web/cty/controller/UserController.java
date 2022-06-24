@@ -2,27 +2,30 @@ package book.web.cty.controller;
 
 import book.web.cty.pojo.User;
 import book.web.cty.service.UserService;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import redis.util.RedisUtil;
-import util.MD5Util;
-import util.PasswordUtil;
-import util.RandImageUtil;
-import util.oConvertUtils;
+import util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,7 +47,28 @@ public class UserController {
     @Resource
     RedisUtil redisUtil;
 
+    @Resource
+    private MinioUtils minioUtils;
+
+    @Value("${minio.endpoint}")
+    private String address;
+    @Value("${minio.bucketName}")
+    private String bucketName;
+
     private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
+
+    @ApiOperation("头像上传")
+    @PostMapping("/upload")
+    public Result upload(MultipartFile file, String userId) {
+        try {
+            List<String> upload = minioUtils.upload(new MultipartFile[]{file});
+            String url = address+"/"+bucketName+"/"+upload.get(0);
+            return new Result(true, StatusCode.OK, "上传头像成功", url);
+        }catch (Exception e){
+            System.out.println(e.toString());
+            return new Result(false, StatusCode.ERROR, "上传头像失败");
+        }
+    }
 
     /**
      * 后台生成图形验证码
@@ -204,6 +228,7 @@ public class UserController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Result update(@RequestBody User user, @PathVariable Long id) {
+        System.out.println(StpUtil.hasRole(""));
         user.setId(id);
         userService.update(user);
         return new Result(true, StatusCode.OK, "修改成功");

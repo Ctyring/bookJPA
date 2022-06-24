@@ -67,3 +67,8 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: false
+minio:
+  endpoint: http://127.0.0.1:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: user

@@ -1,7 +1,12 @@
 package book.web.cty.controller;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,14 +28,13 @@ import entity.StatusCode;
  *
  */
 @RestController
-@CrossOrigin
 @RequestMapping("/word")
+@Api(tags = "词云控制")
 public class WordController {
 
 	@Autowired
 	private WordService wordService;
-	
-	
+
 	/**
 	 * 查询全部数据
 	 * @return
@@ -48,6 +52,25 @@ public class WordController {
 	@RequestMapping(value="/{id}",method= RequestMethod.GET)
 	public Result findById(@PathVariable Long id){
 		return new Result(true,StatusCode.OK,"查询成功",wordService.findById(id));
+	}
+
+	@RequestMapping(value="/edit",method = RequestMethod.POST)
+	public Result edit(@RequestBody JSONObject jsonObject){
+		Long userId = Long.valueOf(jsonObject.getString("userId"));
+		ArrayList<String> tags = (ArrayList<String>) jsonObject.get("tags");
+		Map map = new HashMap();
+		map.put("userId", userId);
+		List<Word> before = wordService.findSearch(map);
+		for (Word word1 : before) {
+			wordService.deleteById(word1.getId());
+		}
+		for (String tag : tags){
+			Word word1 = new Word();
+			word1.setTag(tag);
+			word1.setUserId(userId);
+			wordService.add(word1);
+		}
+		return new Result(true, StatusCode.OK, "修改成功");
 	}
 
 

@@ -3,6 +3,8 @@ package book.web.cty.pojo;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * user实体类

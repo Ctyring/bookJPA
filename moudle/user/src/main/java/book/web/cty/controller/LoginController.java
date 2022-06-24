@@ -1,6 +1,7 @@
 package book.web.cty.controller;
 
 import book.web.cty.message.EmailSendMsgHandle;
+import cn.dev33.satoken.stp.StpUtil;
 import vo.LoginUser;
 import book.web.cty.pojo.SysLoginModel;
 import book.web.cty.pojo.User;
@@ -85,6 +86,7 @@ public class LoginController {
         String username = loginModel.getUsername();
         String password = loginModel.getPassword();
         String captcha = loginModel.getCaptcha();
+
         if (captcha == null){
             return new Result(false, StatusCode.FAILED, "验证码无效");
         }
@@ -111,6 +113,7 @@ public class LoginController {
         redisUtil.del(realKey);
         LoginUser loginUser = new LoginUser();
         BeanUtils.copyProperties(user, loginUser);
+        StpUtil.login(loginUser.getId());
         //TODO 加入日志
         return result;
     }

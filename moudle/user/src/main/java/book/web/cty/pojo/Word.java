@@ -1,8 +1,6 @@
 package book.web.cty.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 /**
  * word实体类
@@ -14,14 +12,12 @@ import java.io.Serializable;
 public class Word implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;//id
 
-
-	
 	private String tag;//tag
 	private Long userId;//user_id
 
-	
 	public Long getId() {
 		return id;
 	}

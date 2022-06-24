@@ -7,27 +7,34 @@ import org.springframework.web.client.RestTemplate;
 import redis.util.RedisUtil;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import util.IdWorker;
+import util.MinioUtils;
 
 @SpringBootApplication
 @EnableSwagger2
 public class UserApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(UserApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(UserApplication.class, args);
+    }
 
-	@Bean
-	public IdWorker idWorkker(){
-		return new IdWorker(1, 1);
-	}
+    @Bean
+    public IdWorker idWorkker() {
+        return new IdWorker(1, 1);
+    }
 
-	@Bean
-	RedisUtil redisUtil(){
-		return new RedisUtil();
-	}
+    @Bean
+    RedisUtil redisUtil() {
+        return new RedisUtil();
+    }
 
-	@Bean
-	RestTemplate restTemplate(){
-		return new RestTemplate();
-	}
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Bean
+    MinioUtils minioUtils() {
+        return new MinioUtils();
+    }
+
 }

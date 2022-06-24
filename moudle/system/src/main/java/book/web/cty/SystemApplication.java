@@ -1,5 +1,7 @@
 package book.web.cty;
 
+import io.minio.MinioClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +12,7 @@ import util.IdWorker;
 @SpringBootApplication
 @EnableSwagger2
 public class SystemApplication {
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(SystemApplication.class, args);
@@ -23,4 +26,6 @@ public class SystemApplication {
 	@Bean RedisUtil redisUtil(){
 		return new RedisUtil();
 	}
+
+
 }

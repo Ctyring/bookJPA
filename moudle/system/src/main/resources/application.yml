@@ -50,7 +50,6 @@ spring:
       shutdown-timeout: 100ms
     password: ''
     port: 6379
-
 # Sa-Token配置
 sa-token:
   # token名称 (同时也是cookie名称)
@@ -67,3 +66,4 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: false
+
