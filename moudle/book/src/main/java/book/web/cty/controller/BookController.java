@@ -20,7 +20,6 @@ import entity.StatusCode;
  *
  */
 @RestController
-@CrossOrigin
 @RequestMapping("/book")
 public class BookController {
 

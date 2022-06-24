@@ -25,7 +25,6 @@ import entity.StatusCode;
  *
  */
 @RestController
-@CrossOrigin
 @RequestMapping("/storage")
 public class StorageController {
 

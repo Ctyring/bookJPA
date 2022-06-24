@@ -7,12 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="system" />
         <module name="starter" />
         <module name="bookJPA_common" />
+        <module name="book" />
         <module name="user" />
         <module name="gateway" />
         <module name="nacos" />
-        <module name="book" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -30,6 +31,7 @@
       <module name="moudle" options="" />
       <module name="nacos" options="-parameters" />
       <module name="starter" options="-parameters" />
+      <module name="system" options="-parameters" />
       <module name="user" options="-parameters" />
     </option>
   </component>

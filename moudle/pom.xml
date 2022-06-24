@@ -14,6 +14,7 @@
     <modules>
         <module>user</module>
         <module>book</module>
+        <module>system</module>
     </modules>
 <dependencies>
     <dependency>

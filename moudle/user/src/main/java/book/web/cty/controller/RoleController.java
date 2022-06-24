@@ -18,9 +18,7 @@ import java.util.Map;
  */
 @Api(tags="角色控制")
 @RestController
-@CrossOrigin
 @RequestMapping("/role")
-
 public class RoleController {
 
 	@Autowired

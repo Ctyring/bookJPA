@@ -19,6 +19,7 @@ import util.PasswordUtil;
 import util.RandImageUtil;
 import util.oConvertUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,35 +30,36 @@ import java.util.Map;
  *
  * @author Administrator
  */
-@Api(tags="用户控制")
+@Api(tags = "用户控制")
 @RestController
-@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    private RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    private RestTemplate restTemplate;
 
-    private RedisUtil redisUtil = new RedisUtil();
+    @Resource
+    RedisUtil redisUtil;
 
     private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
+
     /**
-     * 后台生成图形验证码 ：有效
-     * @param response
+     * 后台生成图形验证码
      * @param key
      */
     @ApiOperation("获取验证码")
     @GetMapping(value = "/randomImage/{key}")
-    public Result randomImage(HttpServletResponse response, @PathVariable String key){
+    public Result randomImage(@PathVariable String key) {
         try {
-            String code = RandomUtil.randomString(BASE_CHECK_CODES,4);
+            String code = RandomUtil.randomString(BASE_CHECK_CODES, 4);
             String lowerCaseCode = code.toLowerCase();
-            String realKey = MD5Util.MD5Encode(lowerCaseCode+key, "utf-8");
+            String realKey = MD5Util.MD5Encode(lowerCaseCode + key, "utf-8");
             redisUtil.set(realKey, lowerCaseCode, 60);
             String base64 = RandImageUtil.generate(code);
-            return new Result(true, StatusCode.OK, base64);
+            return new Result(true, StatusCode.OK, "获取验证码成功",base64);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, StatusCode.ERROR, "获取验证码失败");
@@ -65,42 +67,43 @@ public class UserController {
     }
 
     /**
-     * 增加
-     *
-     * @param user
+     * 注册
      */
+    @ApiOperation("用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public Result userRegitser(@RequestBody JSONObject object, User user) {
-        String email = user.getEmail();
-        String smscode = object.getString("smscode");
+    public Result userRegitser(@RequestBody JSONObject object) {
+        String email = object.getString("email");
+        String smscode = object.getString("code");
         Object code = redisUtil.get(email);
         String username = object.getString("username");
-        if (oConvertUtils.isEmpty(username)){
+        if (oConvertUtils.isEmpty(username)) {
             username = email;
         }
         String password = object.getString("password");
-        if (oConvertUtils.isEmpty(password)){
+        if (oConvertUtils.isEmpty(password)) {
             password = RandomUtil.randomString(8);
         }
         User user1 = userService.findUserByUsername(username);
-        if (user1 != null){
+        if (user1 != null) {
             return new Result(false, StatusCode.FAILED, "用户名已经被注册");
         }
-        if (oConvertUtils.isNotEmpty(email)){
+        if (oConvertUtils.isNotEmpty(email)) {
             User user2 = userService.findUserByEmail(email);
-            if (user2 != null){
+            if (user2 != null) {
                 return new Result(false, StatusCode.FAILED, "邮箱已经被注册");
             }
         }
 
-        if(null == code){
+        if (null == code) {
+            System.out.println(email);
             return new Result(false, StatusCode.FAILED, "邮箱验证码已经过期请重新获取");
         }
-        if(!smscode.equals(code.toString())){
+        if (!smscode.equals(code.toString())) {
             return new Result(false, StatusCode.FAILED, "验证码错误");
         }
 
-        try{
+        try {
+            User user = new User();
             user.setCreateTime(new Date());
             String salt = oConvertUtils.randomGen(8);
             String passwordEncode = PasswordUtil.encrypt(username, password, salt);
@@ -109,9 +112,11 @@ public class UserController {
             user.setPassword(passwordEncode);
             user.setEmail(email);
             user.setRole(2L);
+            user.setPicture("https://pic.imgdb.cn/item/620874352ab3f51d9141099f.jpg");
             userService.add(user);
             return new Result(true, StatusCode.FAILED, "注册成功");
-        }catch (Exception e){
+        } catch (Exception e) {
+            System.out.println(e.toString());
             return new Result(false, StatusCode.FAILED, "注册失败");
         }
     }

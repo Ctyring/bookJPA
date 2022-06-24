@@ -1,8 +1,6 @@
 package book.web.cty.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,16 +14,17 @@ import java.util.Date;
 public class User implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;//id
     private String birthday;//birthday
     private Long role;
     private String des;//des
-    private Integer gender;//gender
+    private Integer gender = 0;//gender
     private String name;//name
     private String password;//password
     private String picture;//picture
-    private Integer status;//status
-    private Integer delFlag;//status
+    private Integer status = 0;//status
+    private Integer delFlag = 0;//delFlag
     private String openid;
     private String email;
     private String username;

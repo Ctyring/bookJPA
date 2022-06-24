@@ -20,7 +20,6 @@ import java.util.Map;
 @RequestMapping("/permission")
 @RestController
 @Api(tags = "权限控制")
-@CrossOrigin
 public class PermissionController {
 
     @Autowired
