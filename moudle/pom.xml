@@ -41,12 +41,12 @@
         <artifactId>springfox-swagger-ui</artifactId>
         <version>2.7.0</version>
     </dependency>
-    <!-- Sa-Token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
-    <dependency>
-        <groupId>cn.dev33</groupId>
-        <artifactId>sa-token-spring-boot-starter</artifactId>
-        <version>1.29.0</version>
-    </dependency>
+<!--    &lt;!&ndash; Sa-Token 权限认证, 在线文档：http://sa-token.dev33.cn/ &ndash;&gt;-->
+<!--    <dependency>-->
+<!--        <groupId>cn.dev33</groupId>-->
+<!--        <artifactId>sa-token-spring-boot-starter</artifactId>-->
+<!--        <version>1.29.0</version>-->
+<!--    </dependency>-->
 
     <!-- hutool工具类-->
     <dependency>
@@ -64,6 +64,10 @@
         <groupId>com.alibaba.cloud</groupId>
         <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         <version>${spring-cloud-alibaba.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
     </dependency>
 </dependencies>
     <properties>

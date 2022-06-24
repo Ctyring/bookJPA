@@ -1,6 +1,7 @@
 package book.web;
 
 import book.web.loader.DynamicRouteLoader;
+import cn.dev33.satoken.SaManager;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,8 +27,9 @@ public class GatewayApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(GatewayApplication.class, args);
-        String userName = applicationContext.getEnvironment().getProperty("jeecg.test");
-        System.err.println("user name :" +userName);
+//        String userName = applicationContext.getEnvironment().getProperty("jeecg.test");
+//        System.err.println("user name :" +userName);
+        System.out.println("启动成功：Sa-Token配置如下：" + SaManager.getConfig());
     }
 
     /**

@@ -228,7 +228,11 @@ public class UserController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Result update(@RequestBody User user, @PathVariable Long id) {
-        System.out.println(StpUtil.hasRole(""));
+        System.out.println(StpUtil.getRoleList(id));
+        System.out.println(StpUtil.getPermissionList(id));
+        if (!StpUtil.hasPermission(id, "updateUser")){
+            return new Result(false, StatusCode.FAILED, "修改失败");
+        }
         user.setId(id);
         userService.update(user);
         return new Result(true, StatusCode.OK, "修改成功");

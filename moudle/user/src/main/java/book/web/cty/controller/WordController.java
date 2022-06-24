@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import org.apache.commons.lang.StringUtils;
@@ -94,6 +95,7 @@ public class WordController {
      */
     @RequestMapping(value="/search",method = RequestMethod.POST)
     public Result findSearch( @RequestBody Map searchMap){
+
         return new Result(true,StatusCode.OK,"查询成功",wordService.findSearch(searchMap));
     }
 	

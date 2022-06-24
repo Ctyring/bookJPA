@@ -113,7 +113,10 @@ public class LoginController {
         redisUtil.del(realKey);
         LoginUser loginUser = new LoginUser();
         BeanUtils.copyProperties(user, loginUser);
-        StpUtil.login(loginUser.getId());
+        StpUtil.login(username);
+        StpUtil.getTokenSession().set("user", loginUser);
+        System.out.println(StpUtil.getTokenInfo().toString());
+
         //TODO 加入日志
         return result;
     }
