@@ -113,11 +113,9 @@ public class LoginController {
         redisUtil.del(realKey);
         LoginUser loginUser = new LoginUser();
         BeanUtils.copyProperties(user, loginUser);
-        StpUtil.login(username);
+        StpUtil.login(user.getId());
         StpUtil.getTokenSession().set("user", loginUser);
         System.out.println(StpUtil.getTokenInfo().toString());
-
-        //TODO 加入日志
         return result;
     }
 
@@ -126,9 +124,9 @@ public class LoginController {
      * */
     private Result loginInfo(User user){
         String pwd = user.getPassword();
-        String name = user.getUsername();
+        String id = String.valueOf(user.getId());
         JSONObject obj = new JSONObject();
-        String token = JwtUtil.sign(name, pwd);
+        String token = JwtUtil.sign(id, pwd);
         redisUtil.set(StatusCode.PREFIX_USER_TOKEN+token, token);
         redisUtil.expire(StatusCode.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME * 2 / 1000);
         obj.put("token", token);

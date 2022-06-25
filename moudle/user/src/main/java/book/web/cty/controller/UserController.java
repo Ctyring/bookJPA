@@ -1,5 +1,6 @@
 package book.web.cty.controller;
 
+import book.web.cty.message.MQSender;
 import book.web.cty.pojo.User;
 import book.web.cty.service.UserService;
 import cn.dev33.satoken.stp.StpUtil;
@@ -46,6 +47,9 @@ public class UserController {
     @Resource
     private MinioUtils minioUtils;
 
+    @Autowired
+    MQSender mqSender;
+
     @Value("${minio.endpoint}")
     private String address;
     @Value("${minio.bucketName}")
@@ -53,14 +57,20 @@ public class UserController {
 
     private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
 
+    @RequestMapping("/mq")
+    @ResponseBody
+    public void mq() {
+        mqSender.send("Hello");
+    }
+
     @ApiOperation("头像上传")
     @PostMapping("/upload")
     public Result upload(MultipartFile file, String userId) {
         try {
             List<String> upload = minioUtils.upload(new MultipartFile[]{file});
-            String url = address+"/"+bucketName+"/"+upload.get(0);
+            String url = address + "/" + bucketName + "/" + upload.get(0);
             return new Result(true, StatusCode.OK, "上传头像成功", url);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.toString());
             return new Result(false, StatusCode.ERROR, "上传头像失败");
         }
@@ -68,6 +78,7 @@ public class UserController {
 
     /**
      * 后台生成图形验证码
+     *
      * @param key
      */
     @ApiOperation("获取验证码")
@@ -79,7 +90,7 @@ public class UserController {
             String realKey = MD5Util.MD5Encode(lowerCaseCode + key, "utf-8");
             redisUtil.set(realKey, lowerCaseCode, 60);
             String base64 = RandImageUtil.generate(code);
-            return new Result(true, StatusCode.OK, "获取验证码成功",base64);
+            return new Result(true, StatusCode.OK, "获取验证码成功", base64);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, StatusCode.ERROR, "获取验证码失败");
@@ -224,10 +235,10 @@ public class UserController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Result update(HttpServletRequest httpServletRequest, @RequestBody User user, @PathVariable String id) {
-        String username = JwtUtil.getUserNameByToken(httpServletRequest);
-        System.out.println(StpUtil.getRoleList(username));
-        System.out.println(StpUtil.getPermissionList(username));
-        if (!Objects.equals(username, id) && !StpUtil.hasPermission(id, "updateUser")){
+        String uid = JwtUtil.getIdByToken(httpServletRequest);
+        System.out.println(StpUtil.getRoleList(uid));
+        System.out.println(StpUtil.getPermissionList(uid));
+        if (!Objects.equals(uid, id) && !StpUtil.hasPermission(uid, "updateUser")) {
             return new Result(false, StatusCode.FAILED, "修改失败");
         }
         user.setUsername(id);

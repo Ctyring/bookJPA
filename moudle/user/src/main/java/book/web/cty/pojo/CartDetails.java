@@ -27,5 +27,4 @@ public class CartDetails {
     private String picture;
     private Float purchasePrice;
     private Float countPrice;
-    private Long cartId;//id
 }

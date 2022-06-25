@@ -1,8 +1,8 @@
 package book.web.cty.service;
 
-import book.web.cty.dao.CartDetailsDao;
+
 import book.web.cty.dao.OrderDetailsDao;
-import book.web.cty.pojo.CartDetails;
+
 import book.web.cty.pojo.OrderDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -84,7 +84,7 @@ public class OrderDetailsService {
 
     /**
      * 修改
-     * @param cartDetails
+     * @param orderDetails
      */
     public void update(OrderDetails orderDetails) {
         orderDetailsDao.save(orderDetails);

@@ -1,7 +1,11 @@
 package book.web.cty.controller;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import book.web.cty.pojo.Book;
+import book.web.cty.pojo.OrderDetails;
+import book.web.cty.service.BookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,10 @@ import book.web.cty.service.OrderService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+import util.JwtUtil;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * order控制器层
  * @author Administrator
@@ -31,6 +39,9 @@ public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
+
+	@Autowired
+	private BookService bookService;
 	
 	
 	/**
@@ -81,7 +92,22 @@ public class OrderController {
 	 * @param order
 	 */
 	@RequestMapping(method=RequestMethod.POST)
-	public Result add(@RequestBody Order order  ){
+	public Result add(HttpServletRequest httpServletRequest, @RequestBody Order order  ){
+		String id = JwtUtil.getIdByToken(httpServletRequest);
+		if (!Objects.equals(id, String.valueOf(order.getId()))){
+			return new Result(false, StatusCode.FAILED, "购买失败");
+		}
+		for (OrderDetails orderDetails : order.getOrderDetails()){
+			Book book = bookService.findById(orderDetails.getId());
+			if(book.getInventory() < orderDetails.getInventory()){
+				return new Result(true,StatusCode.FAILED,"库存不足");
+			}
+		}
+		for (OrderDetails orderDetails : order.getOrderDetails()){
+			Book book = bookService.findById(orderDetails.getId());
+			book.setInventory(book.getInventory() - orderDetails.getInventory());
+			bookService.update(book);
+		}
 		orderService.add(order);
 		return new Result(true,StatusCode.OK,"增加成功");
 	}

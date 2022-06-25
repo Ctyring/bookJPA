@@ -29,5 +29,4 @@ public class OrderDetails{
     private String picture;
     private Float purchasePrice;
     private Float countPrice;
-    private Long orderId;//id
 }

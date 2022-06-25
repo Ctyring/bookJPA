@@ -1,9 +1,9 @@
 package book.web.cty.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
 /**
  * cart实体类
  * @author Administrator
@@ -43,6 +43,9 @@ public class Cart implements Serializable{
 		this.userId = userId;
 	}
 
-
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "cart_id")
+	@OrderBy
+	private Set<CartDetails> cartDetails;
 	
 }

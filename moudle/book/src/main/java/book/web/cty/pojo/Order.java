@@ -16,12 +16,13 @@ public class Order implements Serializable{
 	@Id
 	private Long id;//id
 
-
-	
 	private Float countPrice;//count_price
 	private java.util.Date orderTime;//order_time
 	private Long userId;//user_id
-
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JoinColumn(name = "order_id")
+	@OrderBy
+	private Set<OrderDetails> orderDetails;
 	
 	public Long getId() {
 		return id;
@@ -51,8 +52,11 @@ public class Order implements Serializable{
 		this.userId = userId;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "order_id")
-	@OrderBy
-	private Set<OrderDetails> orderDetails;
+	public Set<OrderDetails> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(Set<OrderDetails> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
 }

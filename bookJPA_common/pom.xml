@@ -72,6 +72,11 @@
       <artifactId>okhttp</artifactId>
       <version>3.10.0</version>
     </dependency>
+    <!--AMQP-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-amqp</artifactId>
+    </dependency>
   </dependencies>
 
 </project>

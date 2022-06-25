@@ -38,7 +38,6 @@ public class StpInterfaceImpl implements StpInterface {
      */
     @Override
     public List<String> getPermissionList(Object loginId, String loginType) {
-        List<String> perList = new ArrayList<>();
         List<String> list = getRoleList(loginId, loginType);
         List<String> permissionList = new ArrayList<>();
         for (String role: list) {
@@ -63,7 +62,7 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
         List<String> list = new ArrayList<>();
-        list.add(roleService.findById((userService.findUserByUsername(loginId.toString()).getRole())).getName());
+        list.add(roleService.findById((userService.findById((Long) loginId).getRole())).getName());
         return list;
     }
 

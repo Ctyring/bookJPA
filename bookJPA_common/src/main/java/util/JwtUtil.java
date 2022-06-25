@@ -75,7 +75,7 @@ public class JwtUtil {
 	 *
 	 * @return token中包含的用户名
 	 */
-	public static String getUsername(String token) {
+	public static String getId(String token) {
 		try {
 			DecodedJWT jwt = JWT.decode(token);
 			return jwt.getClaim("username").asString();
@@ -105,9 +105,9 @@ public class JwtUtil {
 	 * @return
 	 * @throws BookException
 	 */
-	public static String getUserNameByToken(HttpServletRequest request) throws BookException {
+	public static String getIdByToken(HttpServletRequest request) throws BookException {
 		String accessToken = request.getHeader("X-Access-Token");
-		String username = getUsername(accessToken);
+		String username = getId(accessToken);
 		if (oConvertUtils.isEmpty(username)) {
 			throw new BookException("未获取到用户");
 		}
