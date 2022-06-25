@@ -8,8 +8,6 @@ import com.alibaba.fastjson.JSONObject;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
-import io.minio.MinioClient;
-import io.minio.PutObjectArgs;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +20,9 @@ import redis.util.RedisUtil;
 import util.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * user控制器层
@@ -227,13 +223,14 @@ public class UserController {
      * @param user
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Result update(@RequestBody User user, @PathVariable Long id) {
-        System.out.println(StpUtil.getRoleList(id));
-        System.out.println(StpUtil.getPermissionList(id));
-        if (!StpUtil.hasPermission(id, "updateUser")){
+    public Result update(HttpServletRequest httpServletRequest, @RequestBody User user, @PathVariable String id) {
+        String username = JwtUtil.getUserNameByToken(httpServletRequest);
+        System.out.println(StpUtil.getRoleList(username));
+        System.out.println(StpUtil.getPermissionList(username));
+        if (!Objects.equals(username, id) && !StpUtil.hasPermission(id, "updateUser")){
             return new Result(false, StatusCode.FAILED, "修改失败");
         }
-        user.setId(id);
+        user.setUsername(id);
         userService.update(user);
         return new Result(true, StatusCode.OK, "修改成功");
     }

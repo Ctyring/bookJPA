@@ -15,7 +15,8 @@ import java.io.Serializable;
 public class Book implements Serializable{
 
 	@Id
-	private Long isbn;//isbn
+	private Long id;
+	private String isbn;//isbn
 
 	private String category;//category
 	private String des;//des
@@ -49,10 +50,10 @@ public class Book implements Serializable{
 		this.pressName = pressName;
 	}
 
-	public Long getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
-	public void setIsbn(Long isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 

@@ -99,7 +99,7 @@ public class BookController {
 	 * @param book
 	 */
 	@RequestMapping(value="/{id}",method= RequestMethod.PUT)
-	public Result update(@RequestBody Book book, @PathVariable Long isbn ){
+	public Result update(@RequestBody Book book, @PathVariable String isbn ){
 		book.setIsbn(isbn);
 		bookService.update(book);
 		return new Result(true,StatusCode.OK,"修改成功");

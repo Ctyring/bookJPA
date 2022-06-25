@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
-	<!--定义日志文件的存储地址 -->
-	<property name="LOG_HOME" value="../logs" />
+<!--	&lt;!&ndash;定义日志文件的存储地址 &ndash;&gt;-->
+<!--	<property name="LOG_HOME" value="../logs" />-->
 
 	<!--<property name="COLOR_PATTERN" value="%black(%contextName-) %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %boldMagenta( %replace(%caller{1}){'\t|Caller.{1}0|\r\n', ''})- %gray(%msg%xEx%n)" />-->
 	<!-- 控制台输出 -->
@@ -27,7 +27,10 @@
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50}:%L - %msg%n</pattern>
 		</encoder>
 	</appender>
-
+	<appender name="GELF" class="de.siegmar.logbackgelf.GelfUdpAppender">
+		<graylogHost>124.221.104.172</graylogHost>
+		<graylogPort>12201</graylogPort>
+	</appender>
 
 	<!--myibatis log configure -->
 	<logger name="com.apache.ibatis" level="TRACE" />
