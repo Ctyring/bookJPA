@@ -11,6 +11,9 @@
         <option value="$PROJECT_DIR$/bookJPA_cloud/starter/pom.xml" />
         <option value="$PROJECT_DIR$/moudle/pom.xml" />
         <option value="$PROJECT_DIR$/moudle/User/pom.xml" />
+        <option value="$PROJECT_DIR$/bookJPA_cloud/monitor/pom.xml" />
+        <option value="$PROJECT_DIR$/bookJPA_cloud/jeecg-cloud-sentinel/pom.xml" />
+        <option value="$PROJECT_DIR$/bookJPA_cloud/sentinel/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

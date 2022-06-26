@@ -1,6 +1,18 @@
 server:
   port: 7003
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #暴露所有节点
+  endpoint:
+    health:
+      show-details: ALWAYS  #显示详细信息
 spring:
+  boot:
+    admin:
+      client:
+        url: system:7003
   application:
     name: system #指定服务名
   datasource:
@@ -14,8 +26,8 @@ spring:
   cloud:
     nacos:
       discovery:
-        ip: nacos
-  jpa: 
+        ip: system
+  jpa:
     database: MySQL
     show-sql: true
   mail:

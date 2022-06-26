@@ -1,6 +1,18 @@
 server:
   port: 7001
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #暴露所有节点
+  endpoint:
+    health:
+      show-details: ALWAYS  #显示详细信息
 spring:
+  boot:
+    admin:
+      client:
+        url: book:7003
   application:
     name: book #指定服务名
   datasource:
@@ -14,7 +26,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        ip: nacos
+        ip: book
   jpa: 
     database: MySQL
     show-sql: true

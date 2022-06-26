@@ -19,11 +19,21 @@ public class Order implements Serializable{
 	private Float countPrice;//count_price
 	private java.util.Date orderTime;//order_time
 	private Long userId;//user_id
+	private int payment = 0;
+	private int status = 0;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //	@JoinColumn(name = "order_id")
 	@OrderBy
 	private Set<OrderDetails> orderDetails;
-	
+
+	public int getPayment() {
+		return payment;
+	}
+
+	public void setPayment(int payment) {
+		this.payment = payment;
+	}
+
 	public Long getId() {
 		return id;
 	}

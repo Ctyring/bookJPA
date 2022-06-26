@@ -1,6 +1,10 @@
 server:
   port: 9999
 spring:
+  boot:
+    admin:
+      client:
+        url: gateway:9999
   main:
     allow-bean-definition-overriding: true
   application:
@@ -10,7 +14,7 @@ spring:
     sentinel:
       web-context-unify: false
       transport:
-        dashboard: localhost:8087
+        dashboard: sentinel:8087
       # 懒加载Sentinel Dashboard菜单
       eager: false
     gateway:
@@ -60,7 +64,7 @@ spring:
             methods: GET,POST
     nacos:
       discovery:
-        ip: nacos
+        ip: gateway
 # hystrix 信号量隔离，3秒后自动超时
 hystrix:
   enabled: true

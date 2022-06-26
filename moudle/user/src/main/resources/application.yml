@@ -1,6 +1,18 @@
 server:
   port: 7002
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #暴露所有节点
+  endpoint:
+    health:
+      show-details: ALWAYS  #显示详细信息
 spring:
+  boot:
+    admin:
+      client:
+        url: user:7002
   rabbitmq:
     #服务器地址
     host: rabbitmq
@@ -49,7 +61,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        ip: nacos
+        ip: user
   jpa: 
     database: MySQL
     show-sql: true
@@ -103,7 +115,7 @@ sa-token:
   # 是否输出操作日志
   is-log: false
 minio:
-  endpoint: http://127.0.0.1:9000
+  endpoint: http://minio:9000
   accessKey: minioadmin
   secretKey: minioadmin
   bucketName: user

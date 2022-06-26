@@ -7,10 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="sentinel" />
         <module name="system" />
         <module name="starter" />
         <module name="bookJPA_common" />
         <module name="book" />
+        <module name="monitor" />
         <module name="user" />
         <module name="gateway" />
         <module name="nacos" />
@@ -28,8 +30,10 @@
       <module name="bookJPA_parent" options="" />
       <module name="gateway" options="-parameters" />
       <module name="jeecg-cloud-nacos" options="-parameters" />
+      <module name="monitor" options="-parameters" />
       <module name="moudle" options="" />
       <module name="nacos" options="-parameters" />
+      <module name="sentinel" options="-parameters" />
       <module name="starter" options="-parameters" />
       <module name="system" options="-parameters" />
       <module name="user" options="-parameters" />
