@@ -14,11 +14,13 @@
         <module name="book" />
         <module name="monitor" />
         <module name="user" />
+        <module name="rabbitMQ" />
         <module name="gateway" />
         <module name="nacos" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="jeecg-boot-starter-rabbitmq" target="1.8" />
       <module name="jeecg-cloud-nacos" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -29,10 +31,12 @@
       <module name="bookJPA_common" options="-parameters" />
       <module name="bookJPA_parent" options="" />
       <module name="gateway" options="-parameters" />
+      <module name="jeecg-boot-starter-rabbitmq" options="-parameters" />
       <module name="jeecg-cloud-nacos" options="-parameters" />
       <module name="monitor" options="-parameters" />
-      <module name="moudle" options="" />
+      <module name="moudle" options="-parameters" />
       <module name="nacos" options="-parameters" />
+      <module name="rabbitMQ" options="-parameters" />
       <module name="sentinel" options="-parameters" />
       <module name="starter" options="-parameters" />
       <module name="system" options="-parameters" />

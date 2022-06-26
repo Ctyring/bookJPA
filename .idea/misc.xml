@@ -14,12 +14,15 @@
         <option value="$PROJECT_DIR$/bookJPA_cloud/monitor/pom.xml" />
         <option value="$PROJECT_DIR$/bookJPA_cloud/jeecg-cloud-sentinel/pom.xml" />
         <option value="$PROJECT_DIR$/bookJPA_cloud/sentinel/pom.xml" />
+        <option value="$PROJECT_DIR$/bookJPA_cloud/jeecg-boot-starter-rabbitmq/pom.xml" />
+        <option value="$PROJECT_DIR$/bookJPA_cloud/rabbitMQ/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/User/pom.xml" />
         <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/../jeecg-boot/jeecg-boot/jeecg-boot-starter/jeecg-boot-starter-rabbitmq/pom.xml" />
       </set>
     </option>
   </component>

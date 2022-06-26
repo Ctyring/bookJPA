@@ -3,7 +3,7 @@ package book.web.cty.message;
 
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import util.oConvertUtils;
+import book.web.cty.util.oConvertUtils;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

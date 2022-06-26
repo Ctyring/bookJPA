@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
-import redis.util.RedisUtil;
+import book.web.cty.redis.util.RedisUtil;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import util.IdWorker;
-import util.MinioUtils;
+import book.web.cty.util.IdWorker;
+import book.web.cty.util.MinioUtils;
 
 @SpringBootApplication
 @EnableSwagger2
@@ -22,11 +22,6 @@ public class UserApplication {
     @Bean
     public IdWorker idWorkker() {
         return new IdWorker(1, 1);
-    }
-
-    @Bean
-    RedisUtil redisUtil() {
-        return new RedisUtil();
     }
 
     @Bean

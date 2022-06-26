@@ -2,14 +2,14 @@ package book.web.cty.service;
 
 import book.web.cty.dao.UserDao;
 import book.web.cty.pojo.User;
-import entity.Result;
-import entity.StatusCode;
+import book.web.cty.entity.Result;
+import book.web.cty.entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import util.IdWorker;
+import book.web.cty.util.IdWorker;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

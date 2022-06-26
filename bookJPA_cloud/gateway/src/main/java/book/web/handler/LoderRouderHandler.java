@@ -3,8 +3,8 @@ package book.web.handler;
 import book.web.loader.DynamicRouteLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import redis.listener.RedisListener;
-import util.BaseMap;
+import book.web.cty.redis.listener.RedisListener;
+import book.web.cty.util.BaseMap;
 
 import javax.annotation.Resource;
 

@@ -1,14 +1,14 @@
 package book.web.cty.controller;
 
-import book.web.cty.message.MQSender;
 import book.web.cty.pojo.User;
 import book.web.cty.service.UserService;
+import book.web.cty.util.*;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
-import entity.PageResult;
-import entity.Result;
-import entity.StatusCode;
+import book.web.cty.entity.PageResult;
+import book.web.cty.entity.Result;
+import book.web.cty.entity.StatusCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +17,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
-import redis.util.RedisUtil;
-import util.*;
+import book.web.cty.redis.util.RedisUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -41,14 +39,11 @@ public class UserController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Resource
-    RedisUtil redisUtil;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Resource
     private MinioUtils minioUtils;
-
-    @Autowired
-    MQSender mqSender;
 
     @Value("${minio.endpoint}")
     private String address;
@@ -56,12 +51,6 @@ public class UserController {
     private String bucketName;
 
     private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
-
-    @RequestMapping("/mq")
-    @ResponseBody
-    public void mq() {
-        mqSender.send("Hello");
-    }
 
     @ApiOperation("头像上传")
     @PostMapping("/upload")

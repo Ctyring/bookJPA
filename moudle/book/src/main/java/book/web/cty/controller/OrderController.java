@@ -1,16 +1,15 @@
 package book.web.cty.controller;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import book.web.cty.pojo.Book;
 import book.web.cty.pojo.OrderDetails;
 import book.web.cty.service.BookService;
+import book.web.cty.util.BaseMap;
+import cn.dev33.satoken.stp.StpUtil;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 import book.web.cty.pojo.Order;
 import book.web.cty.service.OrderService;
 
-import entity.PageResult;
-import entity.Result;
-import entity.StatusCode;
-import util.JwtUtil;
+import book.web.cty.entity.PageResult;
+import book.web.cty.entity.Result;
+import book.web.cty.entity.StatusCode;
+import book.web.cty.rabbitmq.client.RabbitMqClient;
+import book.web.cty.util.JwtUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,7 +42,10 @@ public class OrderController {
 
 	@Autowired
 	private BookService bookService;
-	
+
+	@Autowired
+	private RabbitMqClient rabbitMqClient;
+
 	
 	/**
 	 * 查询全部数据
@@ -94,21 +97,23 @@ public class OrderController {
 	@RequestMapping(method=RequestMethod.POST)
 	public Result add(HttpServletRequest httpServletRequest, @RequestBody Order order  ){
 		String id = JwtUtil.getIdByToken(httpServletRequest);
+		if (!StpUtil.isLogin()){
+			return new Result(false, StatusCode.FAILED, "请先登录");
+		}
 		if (!Objects.equals(id, String.valueOf(order.getId()))){
 			return new Result(false, StatusCode.FAILED, "购买失败");
 		}
+		// 订单逻辑
 		for (OrderDetails orderDetails : order.getOrderDetails()){
 			Book book = bookService.findById(orderDetails.getId());
 			if(book.getInventory() < orderDetails.getInventory()){
 				return new Result(true,StatusCode.FAILED,"库存不足");
 			}
 		}
-		for (OrderDetails orderDetails : order.getOrderDetails()){
-			Book book = bookService.findById(orderDetails.getId());
-			book.setInventory(book.getInventory() - orderDetails.getInventory());
-			bookService.update(book);
-		}
-		orderService.add(order);
+		BaseMap map = new BaseMap();
+		map.put("order", order);
+		map.put("id", id);
+		rabbitMqClient.sendMessage(StatusCode.QUEUE_NAME, map);
 		return new Result(true,StatusCode.OK,"增加成功");
 	}
 	

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import book.web.cty.pojo.Book;
 import book.web.cty.service.BookService;
 
-import entity.PageResult;
-import entity.Result;
-import entity.StatusCode;
+import book.web.cty.entity.PageResult;
+import book.web.cty.entity.Result;
+import book.web.cty.entity.StatusCode;
 
 /**
  * book控制器层

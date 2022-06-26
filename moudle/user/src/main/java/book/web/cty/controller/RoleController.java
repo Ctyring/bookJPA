@@ -2,9 +2,9 @@ package book.web.cty.controller;
 
 import book.web.cty.pojo.Role;
 import book.web.cty.service.RoleService;
-import entity.PageResult;
-import entity.Result;
-import entity.StatusCode;
+import book.web.cty.entity.PageResult;
+import book.web.cty.entity.Result;
+import book.web.cty.entity.StatusCode;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -1,12 +1,10 @@
 package book.web.cty.controller;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import book.web.cty.pojo.Message;
 import book.web.cty.service.MessageService;
 
-import entity.PageResult;
-import entity.Result;
-import entity.StatusCode;
+import book.web.cty.entity.PageResult;
+import book.web.cty.entity.Result;
+import book.web.cty.entity.StatusCode;
 /**
  * message控制器层
  * @author Administrator

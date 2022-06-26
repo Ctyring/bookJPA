@@ -15,6 +15,9 @@
         <module>nacos</module>
         <module>gateway</module>
         <module>starter</module>
+        <module>rabbitMQ</module>
+        <module>sentinel</module>
+        <module>monitor</module>
     </modules>
 
 <dependencies>

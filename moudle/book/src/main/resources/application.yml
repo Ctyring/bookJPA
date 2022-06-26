@@ -9,10 +9,27 @@ management:
     health:
       show-details: ALWAYS  #显示详细信息
 spring:
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+    publisher-returns: true
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
+        #消费者的最小数量
+        concurrency: 1
+        #消费者的最大数量
+        max-concurrency: 1
+        #是否支持重试
+        retry:
+          enabled: true
   boot:
     admin:
       client:
-        url: book:7003
+        url: book:7001
   application:
     name: book #指定服务名
   datasource:
@@ -79,3 +96,8 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: false
+minio:
+  endpoint: http://minio:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucketName: user

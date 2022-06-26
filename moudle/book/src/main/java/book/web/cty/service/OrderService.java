@@ -1,25 +1,23 @@
 package book.web.cty.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Selection;
 
+import book.web.cty.pojo.Book;
+import book.web.cty.pojo.OrderDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import util.IdWorker;
+import book.web.cty.util.IdWorker;
 
 import book.web.cty.dao.OrderDao;
 import book.web.cty.pojo.Order;
@@ -38,6 +36,18 @@ public class OrderService {
 	
 	@Autowired
 	private IdWorker idWorker;
+
+	@Autowired
+	private BookService bookService;
+
+	public void addOrder(Order order){
+		for (OrderDetails orderDetails : order.getOrderDetails()){
+			Book book = bookService.findById(orderDetails.getId());
+			book.setInventory(book.getInventory() - orderDetails.getInventory());
+			bookService.update(book);
+		}
+		add(order);
+	}
 
 	/**
 	 * 查询全部列表

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import book.web.cty.pojo.Advertise;
 import book.web.cty.service.AdvertiseService;
 
-import entity.PageResult;
-import entity.Result;
-import entity.StatusCode;
+import book.web.cty.entity.PageResult;
+import book.web.cty.entity.Result;
+import book.web.cty.entity.StatusCode;
 /**
  * advertise控制器层
  * @author Administrator

@@ -2,24 +2,24 @@ package book.web.cty.controller;
 
 import book.web.cty.message.EmailSendMsgHandle;
 import cn.dev33.satoken.stp.StpUtil;
-import vo.LoginUser;
+import book.web.cty.vo.LoginUser;
 import book.web.cty.pojo.SysLoginModel;
 import book.web.cty.pojo.User;
 import book.web.cty.service.UserService;
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
-import entity.Result;
-import entity.StatusCode;
+import book.web.cty.entity.Result;
+import book.web.cty.entity.StatusCode;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import redis.util.RedisUtil;
-import util.JwtUtil;
-import util.MD5Util;
-import util.PasswordUtil;
-import util.oConvertUtils;
+import book.web.cty.redis.util.RedisUtil;
+import book.web.cty.util.JwtUtil;
+import book.web.cty.util.MD5Util;
+import book.web.cty.util.PasswordUtil;
+import book.web.cty.util.oConvertUtils;
 
 /**
  * @Author cty
