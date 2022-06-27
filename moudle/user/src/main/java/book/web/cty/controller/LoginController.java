@@ -124,7 +124,7 @@ public class LoginController {
      * */
     private Result loginInfo(User user){
         String pwd = user.getPassword();
-        String id = String.valueOf(user.getId());
+        Long id = user.getId();
         JSONObject obj = new JSONObject();
         String token = JwtUtil.sign(id, pwd);
         redisUtil.set(StatusCode.PREFIX_USER_TOKEN+token, token);

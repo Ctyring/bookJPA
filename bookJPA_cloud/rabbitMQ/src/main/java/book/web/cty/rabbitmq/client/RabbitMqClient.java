@@ -177,7 +177,7 @@ public class RabbitMqClient {
         log.info("发送消息到mq");
         try {
             rabbitTemplate.convertAndSend(DelayExchangeBuilder.DELAY_EXCHANGE, queueName, params, message -> {
-                log.info(message.toString());
+//                log.info(message.toString());
                 return message;
             });
         } catch (Exception e) {

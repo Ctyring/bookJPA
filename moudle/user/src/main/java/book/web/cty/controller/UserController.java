@@ -223,14 +223,14 @@ public class UserController {
      * @param user
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Result update(HttpServletRequest httpServletRequest, @RequestBody User user, @PathVariable String id) {
-        String uid = JwtUtil.getIdByToken(httpServletRequest);
+    public Result update(HttpServletRequest httpServletRequest, @RequestBody User user, @PathVariable Long id) {
+        Long uid = JwtUtil.getIdByToken(httpServletRequest);
         System.out.println(StpUtil.getRoleList(uid));
         System.out.println(StpUtil.getPermissionList(uid));
         if (!Objects.equals(uid, id) && !StpUtil.hasPermission(uid, "updateUser")) {
             return new Result(false, StatusCode.FAILED, "修改失败");
         }
-        user.setUsername(id);
+        user.setId(id);
         userService.update(user);
         return new Result(true, StatusCode.OK, "修改成功");
     }

@@ -23,9 +23,9 @@ public class SystemApplication {
 		return new IdWorker(1, 1);
 	}
 
-	@Bean RedisUtil redisUtil(){
-		return new RedisUtil();
-	}
+//	@Bean RedisUtil redisUtil(){
+//		return new RedisUtil();
+//	}
 
 
 }

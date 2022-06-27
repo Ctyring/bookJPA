@@ -14,17 +14,26 @@ import java.util.Set;
 public class Order implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;//id
 
 	private Float countPrice;//count_price
-	private java.util.Date orderTime;//order_time
+	private String orderTime;//order_time
 	private Long userId;//user_id
 	private int payment = 0;
 	private int status = 0;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JoinColumn(name = "order_id")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, targetEntity = OrderDetails.class)
+	@JoinColumn(name = "order_id")
 	@OrderBy
 	private Set<OrderDetails> orderDetails;
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public int getPayment() {
 		return payment;
@@ -48,10 +57,10 @@ public class Order implements Serializable{
 		this.countPrice = countPrice;
 	}
 
-	public java.util.Date getOrderTime() {
+	public String getOrderTime() {
 		return orderTime;
 	}
-	public void setOrderTime(java.util.Date orderTime) {
+	public void setOrderTime(String orderTime) {
 		this.orderTime = orderTime;
 	}
 
@@ -68,5 +77,18 @@ public class Order implements Serializable{
 
 	public void setOrderDetails(Set<OrderDetails> orderDetails) {
 		this.orderDetails = orderDetails;
+	}
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"id=" + id +
+				", countPrice=" + countPrice +
+				", orderTime='" + orderTime + '\'' +
+				", userId=" + userId +
+				", payment=" + payment +
+				", status=" + status +
+				", orderDetails=" + orderDetails +
+				'}';
 	}
 }

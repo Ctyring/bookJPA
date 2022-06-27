@@ -7,6 +7,7 @@ import book.web.cty.pojo.Order;
 import book.web.cty.pojo.OrderDetails;
 import book.web.cty.service.BookService;
 import book.web.cty.service.OrderService;
+import book.web.cty.util.oConvertUtils;
 import com.rabbitmq.client.Channel;
 import book.web.cty.entity.StatusCode;
 import lombok.extern.slf4j.Slf4j;
@@ -39,13 +40,28 @@ public class Receiver extends BaseRabbiMqHandler<BaseMap> {
             @Override
             public void handler(BaseMap map, Channel channel) {
                 Order order = map.get("order");
+                Long id = map.getLong("id");
+                Long time = map.getLong("time");
+                System.out.println("进入循环");
                 for (OrderDetails orderDetails : order.getOrderDetails()){
+                    if (oConvertUtils.isEmpty(orderDetails.getId())){
+                        continue;
+                    }
                     Book book = bookService.findById(orderDetails.getId());
+                    if (oConvertUtils.isEmpty(book)){
+                        continue;
+                    }
                     if(book.getInventory() < orderDetails.getInventory()){
                         return;
                     }
                 }
-
+                System.out.println("退出循环");
+//                order.setId(0L);
+                order.setCountPrice(0f);
+                order.setStatus(0);
+                order.setPayment(0);
+                order.setUserId(id);
+                order.setOrderTime(time.toString());
                 orderService.addOrder(order);
             }
         });

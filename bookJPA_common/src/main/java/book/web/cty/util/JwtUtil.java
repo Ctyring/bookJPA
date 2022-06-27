@@ -74,10 +74,10 @@ public class JwtUtil {
 	 *
 	 * @return token中包含的用户名
 	 */
-	public static String getId(String token) {
+	public static Long getId(String token) {
 		try {
 			DecodedJWT jwt = JWT.decode(token);
-			return jwt.getClaim("username").asString();
+			return jwt.getClaim("id").asLong();
 		} catch (JWTDecodeException e) {
 			return null;
 		}
@@ -85,15 +85,15 @@ public class JwtUtil {
 
 	/**
 	 * 生成签名,5min后过期
-	 * @param username 用户名
+	 * @param id id
 	 * @param secret   用户的密码
 	 * @return 加密的token
 	 */
-	public static String sign(String username, String secret) {
+	public static String sign(Long id, String secret) {
 		Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
 		Algorithm algorithm = Algorithm.HMAC256(secret);
 		// 附带username信息
-		return JWT.create().withClaim("username", username).withExpiresAt(date).sign(algorithm);
+		return JWT.create().withClaim("id", id).withExpiresAt(date).sign(algorithm);
 
 	}
 
@@ -104,13 +104,13 @@ public class JwtUtil {
 	 * @return
 	 * @throws BookException
 	 */
-	public static String getIdByToken(HttpServletRequest request) throws BookException {
+	public static Long getIdByToken(HttpServletRequest request) throws BookException {
 		String accessToken = request.getHeader("X-Access-Token");
-		String username = getId(accessToken);
-		if (oConvertUtils.isEmpty(username)) {
+		Long id = getId(accessToken);
+		if (oConvertUtils.isEmpty(id)) {
 			throw new BookException("未获取到用户");
 		}
-		return username;
+		return id;
 	}
 	
 	/**

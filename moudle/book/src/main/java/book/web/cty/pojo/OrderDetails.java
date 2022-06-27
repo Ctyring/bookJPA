@@ -3,6 +3,7 @@ package book.web.cty.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author cty
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_details")
 @Data
-public class OrderDetails{
+public class OrderDetails implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

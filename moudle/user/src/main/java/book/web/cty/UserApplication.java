@@ -29,9 +29,4 @@ public class UserApplication {
         return new RestTemplate();
     }
 
-    @Bean
-    MinioUtils minioUtils() {
-        return new MinioUtils();
-    }
-
 }

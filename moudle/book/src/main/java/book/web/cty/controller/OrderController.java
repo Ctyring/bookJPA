@@ -1,20 +1,20 @@
 package book.web.cty.controller;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import book.web.cty.pojo.Book;
 import book.web.cty.pojo.OrderDetails;
+import book.web.cty.redis.util.RedisUtil;
 import book.web.cty.service.BookService;
 import book.web.cty.util.BaseMap;
+import book.web.cty.util.oConvertUtils;
 import cn.dev33.satoken.stp.StpUtil;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import book.web.cty.pojo.Order;
 import book.web.cty.service.OrderService;
@@ -46,6 +46,24 @@ public class OrderController {
 	@Autowired
 	private RabbitMqClient rabbitMqClient;
 
+	@Autowired
+	private RedisUtil redisUtil;
+
+	@RequestMapping(value = "result", method= RequestMethod.GET)
+	@ResponseBody
+	public Result getResult(Long id, Long time){
+		if (redisUtil.hasKey(id.toString() + time)){
+			return new Result(true,0,"查询成功",0);
+		}
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("time", time);
+		List<Order> orders = orderService.findSearch(map);
+		if (orders.isEmpty()){
+			return new Result(false,StatusCode.FAILED,"购买失败");
+		}
+		return new Result(true,StatusCode.OK,"查询成功", orders.get(0));
+	}
 	
 	/**
 	 * 查询全部数据
@@ -95,26 +113,45 @@ public class OrderController {
 	 * @param order
 	 */
 	@RequestMapping(method=RequestMethod.POST)
-	public Result add(HttpServletRequest httpServletRequest, @RequestBody Order order  ){
-		String id = JwtUtil.getIdByToken(httpServletRequest);
-		if (!StpUtil.isLogin()){
-			return new Result(false, StatusCode.FAILED, "请先登录");
+	public Result add(HttpServletRequest httpServletRequest, @RequestBody Order order ){
+		Long id;
+		try {
+			id = JwtUtil.getIdByToken(httpServletRequest);
+		}catch (Exception e){
+			return new Result(false, StatusCode.UNAUTHORIZED, "请先登录");
 		}
-		if (!Objects.equals(id, String.valueOf(order.getId()))){
+//		if (!StpUtil.isLogin()){
+//			return new Result(false, StatusCode.FAILED, "请先登录");
+//		}
+		if (!Objects.equals(id, order.getUserId())){
 			return new Result(false, StatusCode.FAILED, "购买失败");
 		}
 		// 订单逻辑
 		for (OrderDetails orderDetails : order.getOrderDetails()){
-			Book book = bookService.findById(orderDetails.getId());
-			if(book.getInventory() < orderDetails.getInventory()){
-				return new Result(true,StatusCode.FAILED,"库存不足");
+			if (oConvertUtils.isEmpty(orderDetails.getId())){
+				continue;
 			}
+			Book book = bookService.findById(orderDetails.getId());
+			if (oConvertUtils.isEmpty(book)){
+				continue;
+			}
+			if(book.getInventory() < orderDetails.getInventory()){
+				return new Result(false,StatusCode.FAILED,"库存不足");
+			}
+		}
+		Long time = System.currentTimeMillis();
+		if (redisUtil.hasKey(id.toString()+time)){
+			return new Result(false, StatusCode.ERROR, "请求过快");
+		}
+		if (!redisUtil.set(id.toString()+time, time)){
+			return new Result(false, StatusCode.ERROR, "请求失败");
 		}
 		BaseMap map = new BaseMap();
 		map.put("order", order);
 		map.put("id", id);
+		map.put("time", time);
 		rabbitMqClient.sendMessage(StatusCode.QUEUE_NAME, map);
-		return new Result(true,StatusCode.OK,"增加成功");
+		return new Result(true,StatusCode.OK,"请求成功", time);
 	}
 	
 	/**

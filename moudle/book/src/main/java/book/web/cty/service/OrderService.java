@@ -1,5 +1,6 @@
 package book.web.cty.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,9 @@ import javax.persistence.criteria.Root;
 
 import book.web.cty.pojo.Book;
 import book.web.cty.pojo.OrderDetails;
+import book.web.cty.redis.util.RedisUtil;
+import book.web.cty.util.oConvertUtils;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,15 +42,30 @@ public class OrderService {
 	private IdWorker idWorker;
 
 	@Autowired
+	private RedisUtil redisUtil;
+
+	@Autowired
 	private BookService bookService;
 
 	public void addOrder(Order order){
-		for (OrderDetails orderDetails : order.getOrderDetails()){
+		for (OrderDetails orderDetails : order.getOrderDetails()) {
+			if (oConvertUtils.isEmpty(orderDetails.getId())) {
+				continue;
+			}
 			Book book = bookService.findById(orderDetails.getId());
+			if (oConvertUtils.isEmpty(book)) {
+				continue;
+			}
 			book.setInventory(book.getInventory() - orderDetails.getInventory());
 			bookService.update(book);
 		}
+		System.out.println("成功删除库存");
+		String time = order.getOrderTime();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		order.setOrderTime(simpleDateFormat.format(Long.parseLong(order.getOrderTime())));
+        System.out.println(order.toString());
 		add(order);
+		redisUtil.del(order.getUserId().toString()+time);
 	}
 
 	/**
